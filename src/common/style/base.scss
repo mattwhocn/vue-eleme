@@ -1,0 +1,67 @@
+/*
+* 默认样式
+*/
+body,html{
+  font-weight: 200;
+  font-family: 'PingFang SC';
+}
+.clearfix:after{
+  content: '.';
+  display: block;
+  height:0;
+  line-height:0;
+  clear: both;
+  visibility: hidden;
+}
+
+
+/*
+* 一像素的边框的mixin以及查询
+*/
+@mixin border-line($color: rgba(7,17,27,0.1)) {
+  position: relative;
+  :after{
+    content: '';
+    display: block;
+    position: absolute;
+    width:100%;
+    left:0;
+    bottom:0;
+    border-top:1px solid rgba(7,17,27,0.1);
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),only screen and (min-device-pixel-ratio: 1.5) {
+  .border-line{
+    :after{
+      -webkit-transform: scaleY(0.7);
+      transform: scaleY(0.7);
+    }
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2) {
+  .border-line{
+    :after{
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3),only screen and (min-device-pixel-ratio: 3) {
+  .border-line{
+    :after{
+      -webkit-transform: scaleY(0.33);
+      transform: scaleY(0.33);
+    }
+  }
+}
+
+/*
+* 2x 和 3x 图的区分
+*/
+@mixin bg-img($url){
+  background-image: url($url + "@2x.png");
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2) {
+    background-image: url($url + "@3x.png");
+  }
+}
