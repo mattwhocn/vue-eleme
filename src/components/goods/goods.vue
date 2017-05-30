@@ -25,11 +25,13 @@
         </li>
       </ul>
     </div>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <script>
   import BetterScroll from 'better-scroll'
+  import shopcart from '../shopcart/shopcart'
   const ERR_NO = 0
   export default({
     props: {  // 引入的其他数据
@@ -104,6 +106,9 @@
         }
         return 0
       }
+    },
+    components: {
+      shopcart: shopcart
     }
   })
 </script>
@@ -115,7 +120,7 @@
     display: flex;
     overflow: hidden;
     top:3.47rem;
-    bottom:.92rem;
+    bottom:.96rem;
     width:100%;
     .menu-wrapper{
       flex: 0 0 1.6rem;
