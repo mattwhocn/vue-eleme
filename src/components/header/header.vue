@@ -27,17 +27,33 @@
     <div class="background">
       <img :src="seller.avatar" alt="">
     </div>
+    <transition name="fade">
     <div class="detail" v-show="detailShow" >
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
           <div class="star-wrapper"><star :size="48" :score="4.5"></star></div>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">优惠信息</div>
+            <div class="line"></div>
+          </div>
+          <ul v-if="seller.supports" class="supports">
+            <li v-for="item in seller.supports" class="supports-item" :class="classMap[item.type]">{{item.description}}</li><!-- :class="classMap[seller.support[$index]]" -->
+          </ul>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">商家公告</div>
+            <div class="line"></div>
+          </div>
+          <p class="bulletin">{{seller.bulletin}}</p>
         </div>
       </div>
       <div class="detail-close sticky-footer">
-        <i class="icon-close" @click="hideDetail"></i>
+        <i class="icon-close" @click="hideDetail"></i><!-- v-on:click 缩写成 @click-->
       </div>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -120,21 +136,7 @@
             background-position:left center ;
             background-repeat:no-repeat;
           }
-          .decrease{
-            @include bg-img('decrease_1');
-          }
-          .discount{
-            @include bg-img('discount_1');
-          }
-          .guarantee{
-            @include bg-img('guarantee_1');
-          }
-          .invoice{
-            @include bg-img('invoice_1');
-          }
-          .special{
-            @include bg-img('special_1');
-          }
+
         }
       }
       .support-count{
@@ -202,8 +204,16 @@
       top:0;
       left:0;
       overflow: auto;
+      -webkit-overflow-scrolling: touch;
       background: rgba(7,17,27,.8);
+      backdrop-filter: blur(10px);
       /*filter:blur(10px);*/
+      &.fade-enter,&.fade-leave-active{
+        opacity: 0;
+      }
+      &.fade-enter-active,&.fade-leave-active{
+        transition: opacity .8s;
+      }
       .detail-wrapper{
         min-height: 100%;
         width:100%;
@@ -219,6 +229,42 @@
             margin:.32rem 0 .56rem 0;
             padding:.04rem 0;
           }
+          .title{
+            width:80%;
+            display: flex;
+            margin: auto;
+            .line{
+              flex:1;
+              position: relative;
+              top:-0.12rem;
+              border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+            .text{
+              padding:0 .24rem;
+              font-weight: 700;
+            }
+          }
+          .supports{
+            padding: 0 .96rem;
+            font-size: .24rem;
+            font-weight: 100;
+            line-height: .56rem;
+            margin: .48rem 0;
+            li{
+              text-indent: .44rem;
+              font-weight: 200;
+              background-repeat: no-repeat ;
+              background-position: left center;
+              background-size: .32rem;
+            }
+          }
+          .bulletin{
+            padding: 0 .96rem;
+            font-size: .24rem;
+            font-weight: 200;
+            margin: .48rem 0;
+            line-height: .48rem;
+          }
         }
       }
       .detail-close{
@@ -228,6 +274,22 @@
         margin:-1.28rem auto 0;
         clear: both;
       }
+    }
+    /* 促销信息的图标 */
+    .decrease{
+      @include bg-img('decrease_1');
+    }
+    .discount{
+      @include bg-img('discount_1');
+    }
+    .guarantee{
+      @include bg-img('guarantee_1');
+    }
+    .invoice{
+      @include bg-img('invoice_1');
+    }
+    .special{
+      @include bg-img('special_1');
     }
   }
 </style>
