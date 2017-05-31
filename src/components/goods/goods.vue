@@ -19,6 +19,7 @@
                 <div class="disc" v-if="food.description">{{food.description}}</div>
                 <div class="extra"><span>月售{{food.sellCount}}份</span>&ensp;&ensp;<span>好评率{{food.rating}}%</span></div>
                 <div class="price"><span class="new"><i>¥</i>{{food.price}}</span><span v-show="food.oldPrice" class="old">¥{{food.oldPrice}}</span></div>
+                <div class="cartcontrol-wrapper"><cartcontrol :food="food"></cartcontrol></div>
               </div>
             </li>
           </ul>
@@ -32,6 +33,7 @@
 <script>
   import BetterScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
+  import cartcontrol from '../cartcontrol/cartcontrol'
   const ERR_NO = 0
   export default({
     props: {  // 引入的其他数据
@@ -68,6 +70,7 @@
 
         // betterScroll 提供的探针,检测滚动的位置
         this.foodScroll = new BetterScroll(document.querySelector('#food-wrapper'), {
+          click: true,
           probeType: 3
         })
         // 通过监测 BetterScroll的实例对象 foodScroll 的scroll事件,获取滚动的值
@@ -108,7 +111,8 @@
       }
     },
     components: {
-      shopcart: shopcart
+      shopcart: shopcart,
+      cartcontrol: cartcontrol
     }
   })
 </script>
@@ -230,6 +234,11 @@
               margin-left: .16rem;
               text-decoration: line-through;
             }
+          }
+          .cartcontrol-wrapper{
+            position: absolute;
+            right:0;
+            bottom:0;
           }
         }
       }
