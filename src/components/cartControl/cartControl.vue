@@ -35,6 +35,9 @@
         } else {
           this.food.count++
         }
+
+        // 调用控制中心绑定事件
+        this.$root.eventHub.$emit('cart.add', event.target)
       },
       decreaseCart: function () {
         console.log('click')

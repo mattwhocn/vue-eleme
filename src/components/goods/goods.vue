@@ -26,7 +26,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart ref="shopcart" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :selectFoods="selectFoods"></shopcart>
   </div>
 </template>
 
@@ -108,6 +108,19 @@
           }
         }
         return 0
+      },
+      selectFoods: function () {
+        let foods = []
+        // 在操作加减按钮的时候,food对象已经发生了改变(加上了count字段)
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            // 循环所有的goods对象中的food对象,如果有count属性说明已经发生了改变,讲发生改变的food对象存入数组传入购物车组件中
+            if (food.count) {
+              foods.push(food)
+            }
+          })
+        })
+        return foods
       }
     },
     components: {

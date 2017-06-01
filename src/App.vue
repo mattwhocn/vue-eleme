@@ -12,12 +12,14 @@
 
 <script>
   const ERR_NO = 0
+  import Vue from 'vue'
   import header from './components/header/header'
   export default {
     name: 'app',
     data: function () {
       return {
-        seller: {}
+        seller: {},
+        eventHub: new Vue()
       }
     },
     created () {

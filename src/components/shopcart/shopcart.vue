@@ -13,6 +13,15 @@
         <p class="pay" :class="payClass">{{payDesc}}</p>
       </div>
     </div>
+    <div class="ball-container">
+      <transition name="drop" v-for="ball in balls"
+                  v-on:before-enter="beforeEnter"
+                  v-on:enter="enter"
+                  v-on:leave="leave"
+                  v-bind:css="false">
+        <div class="ball" v-show="hide"><div class="inner inner-hook"></div></div>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -38,7 +47,38 @@
       }
     },
     data () {
-      return {}
+      return {
+        hide: false,
+        balls: [{
+          show: false
+        }, {
+          show: false
+        }, {
+          show: false
+        }, {
+          show: false
+        }, {
+          show: false
+        }],
+        dropBalls: []
+      }
+    },
+    created: function () {
+      let this_ = this
+      this.$root.eventHub.$on('cart.add', function (el) {
+        // el 就是点击的那个cartcontrol组件 拿到 cartcontrol 组件的元素只是为了获取其位置
+        console.log(el)
+        // 遍历balls 拿到一个show 为false的球,执行动画
+        for (let i = 0; i < this_.balls.length; i++) {
+          let ball = this_.balls[i]
+          if (!ball.show) {
+            ball.show = true  // 当置show为true时才执行动画
+            ball.el = el  // 把当前点击元素对象赋值给drop[i]
+            this_.dropBalls.push(ball)
+            return
+          }
+        }
+      })
     },
     computed: {
       totalPrice: function () {
@@ -69,6 +109,52 @@
           return 'not-enough'
         } else {
           return 'enough'
+        }
+      }
+    },
+    methods: {
+      'beforeEnter': function (el) {
+        console.log(el)
+        // el 指的是执行动画的dom对象
+        // js形式的过渡动画,写在动画的钩子函数中
+        // 有可能连续点击,所以要循环所有的show为true的小球
+        let counts = this.balls.length
+        while (counts--) {
+          let ball = this.balls[counts]
+          if (ball.show) {  // 将要进行运动的小球
+            let rect = ball.el.getBoundingClientRect() // 元素相对于视窗的高度--即使小球将要开始运动的位置
+            let x = rect.left - 32 // 小球要运动的x方向的距离
+            let y = -(window.innerHeight - rect.top - 22) // 小球要运动的y方向的距离
+            console.log(x)
+            console.log(y)
+            el.style.display = ''
+            el.style.webkitTransform = `translate3d(0,${y},0)`
+            el.style.transform = `translate3d(0,${y},0)`
+            let inner = el.getElementsByClassName('inner-hook')[0]
+            console.log(inner)
+            inner.style.webkitTransform = `translate3d(${x},0,0)`
+            inner.style.transform = `translate3d(${x},0,0)`
+          }
+        }
+      },
+      'enter': function (el) {
+        /* eslint-disable no-unused-vars */
+        let rf = el.offsetHeight  // 这一句就是触发浏览器的重绘,在动画执行完成之后让小球还原
+        this.$nextTick(function () {  // 在dom更新之后把小球的样式重置
+          el.style.display = ''
+          el.style.webkitTransform = 'translate3d(0,0,0)'
+          el.style.transform = 'translate3d(0,0,0)'
+          let inner = el.getElementsByClassName('inner-hook')[0]
+          inner.style.webkitTransform = 'translate3d(0,0,0)'
+          inner.style.transform = 'translate3d(0,0,0)'
+        })
+      },
+      'leave': function (el) {
+        // 做完一个动画,把动画的balls元素的show置为false
+        var ball = this.dropBalls.shift()
+        if (ball.show) {
+          ball.show = false
+          el.style.display = 'none'
         }
       }
     }
@@ -175,6 +261,24 @@
             background: #00b43c;
             color: #fff
           }
+        }
+      }
+    }
+    .ball-container{
+      .ball{
+        position: fixed;
+        left:.64rem;
+        bottom: .44rem;
+        transition: all .4s;
+        .inner{
+          width:.32rem;
+          height:.32rem;
+          border-radius: 50%;
+          background: rgb(0,160,220);
+          transition: all .4s;
+        }
+        &.drop-enter{
+
         }
       }
     }
