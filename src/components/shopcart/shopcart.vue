@@ -47,7 +47,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   import cartcontrol from '../cartcontrol/cartcontrol'
   import BetterScroll from 'better-scroll'
   export default {
@@ -92,7 +92,7 @@
       let this_ = this
       this.$root.eventHub.$on('cart.add', function (el) {
         // el 就是点击的那个cartcontrol组件 拿到 cartcontrol 组件的元素只是为了获取其位置
-        console.log(el)
+        // console.log(el)
         // 遍历balls 拿到一个show 为false的球,执行动画
         for (let i = 0; i < this_.balls.length; i++) {
           let ball = this_.balls[i]

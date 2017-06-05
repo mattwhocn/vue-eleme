@@ -2,12 +2,12 @@
   <div class="cartcontrol">
     <!--把需要加入动画的div放入transition中-->
     <transition name="roll">
-      <div class="cart-decrease" v-show="food.count>0" @click="decreaseCart">
+      <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
         <i class="icon-remove_circle_outline"></i>
       </div>
     </transition>
     <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-    <div class="cart-add" @click="addCart"><i class=" icon-add_circle"></i></div>
+    <div class="cart-add" @click.stop.prevent="addCart"><i class=" icon-add_circle"></i></div>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
       return {}
     },
     created: function () {
-      console.log(this.food)
+      // console.log(this.food)
     },
     methods: {
       addCart: function (event) {
@@ -71,15 +71,15 @@
     .cart-decrease{
       &.roll-enter{
         opacity: 0;
-        transform: translate3D(0,0,0);
+        transform: translate3D(0.6rem,0,0) rotate(180deg);
       }
       &.roll-enter-active{
-         opacity: 0;
-         transform: translate3D(0,0,0);
-      }
-      &.roll-leave{
+        transition: all linear .3s;
       }
       &.roll-leave-active{
+         opacity: 0;
+         transform: translate3D(0.6rem,0,0) rotate(180deg);
+         transition: all linear .3s;
       }
     }
   }

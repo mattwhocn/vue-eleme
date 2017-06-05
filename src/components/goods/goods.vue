@@ -12,7 +12,7 @@
         <li v-for="item in goods"  class="food-list food-list-hook" >
           <h3 class="title">{{item.name}}</h3>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-line">
+            <li v-for="food in item.foods" class="food-item border-line" @click="selectFood(food,$event)">
               <div class="icon"><img :src="food.icon" alt=""></div>
               <div class="content">
                 <h4 class="name">{{food.name}}</h4>
@@ -27,13 +27,15 @@
       </ul>
     </div>
     <shopcart ref="shopcart" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :selectFoods="selectFoods"></shopcart>
+    <food :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   import BetterScroll from 'better-scroll'
-  import shopcart from '../shopcart/shopcart'
-  import cartcontrol from '../cartcontrol/cartcontrol'
+  import shopcart from '@/components/shopcart/shopcart'
+  import cartcontrol from '@/components/cartcontrol/cartcontrol'
+  import food from '@/components/food/food'
   const ERR_NO = 0
   export default({
     props: {  // 引入的其他数据
@@ -46,7 +48,8 @@
         classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       }
     },
     created () {    // 钩子函数 在创建vue实例的时候改变数据
@@ -97,6 +100,15 @@
         this.foodScroll.scrollToElement(foodElement, 300)
         console.log(index)
         console.log(event)
+      },
+      selectFood: function (food, event) {
+        if (!event._constructed) { // butterscroll 默认阻止了点击事件,再重新定义了点击事件,但是在pc端,阻止不掉点击事件,就会执行两次点击事件,bscroll 的点击事件有一个_constructed 属性,用来区分是原生的点击事件还是bscroll 注册的点击数事件
+          return
+        }
+        console.log(food)
+        console.log(event)
+        this.selectedFood = food
+        this.$refs.food.showFoodDetail()
       }
     },
     computed: {
@@ -125,7 +137,8 @@
     },
     components: {
       shopcart: shopcart,
-      cartcontrol: cartcontrol
+      cartcontrol: cartcontrol,
+      food
     }
   })
 </script>
