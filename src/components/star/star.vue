@@ -76,7 +76,21 @@
     }
   }
   .star.star-36{
-
+    .starItem{
+      width: .30rem;
+      height: .30rem;
+      margin-right: .12rem;
+      background-size: .30rem ;
+    }
+    .starItem.on{
+    @include bg-img('star36_on')
+    }
+    .starItem.half{
+    @include bg-img('star36_half')
+    }
+    .starItem.off{
+    @include bg-img('star36_off')
+  }
   }
   .star.star-24{
 
