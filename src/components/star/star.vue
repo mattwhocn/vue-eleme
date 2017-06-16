@@ -83,16 +83,30 @@
       background-size: .30rem ;
     }
     .starItem.on{
-    @include bg-img('star36_on')
+      @include bg-img('star36_on')
+      }
+      .starItem.half{
+      @include bg-img('star36_half')
+      }
+      .starItem.off{
+      @include bg-img('star36_off')
     }
-    .starItem.half{
-    @include bg-img('star36_half')
-    }
-    .starItem.off{
-    @include bg-img('star36_off')
-  }
   }
   .star.star-24{
-
+    .starItem{
+      width: .20rem;
+      height: .20rem;
+      margin-right: .06rem;
+      background-size: .20rem ;
+    }
+    .starItem.on{
+      @include bg-img('star24_on')
+    }
+    .starItem.half{
+      @include bg-img('star24_half')
+    }
+    .starItem.off{
+      @include bg-img('star24_off')
+    }
   }
 </style>

@@ -55,6 +55,7 @@
     },
     methods: {
       select: function (type, event) {
+        console.log(type)
         if (!event._constructed) {
           return
         }
