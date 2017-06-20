@@ -90,7 +90,6 @@
           height += foodList[i].clientHeight
           this.listHeight.push(height)
         }
-        console.log(this.listHeight)
       },
       selectMenu: function (index, event) {
         if (!event._constructed) { // butterscroll 默认阻止了点击事件,再重新定义了点击事件,但是在pc端,阻止不掉点击事件,就会执行两次点击事件,bscroll 的点击事件有一个_constructed 属性,用来区分是原生的点击事件还是bscroll 注册的点击数事件
@@ -98,15 +97,11 @@
         }
         let foodElement = document.querySelector('#food-wrapper').querySelectorAll('.food-list-hook')[index]
         this.foodScroll.scrollToElement(foodElement, 300)
-        console.log(index)
-        console.log(event)
       },
       selectFood: function (food, event) {
-        if (!event._constructed) { // butterscroll 默认阻止了点击事件,再重新定义了点击事件,但是在pc端,阻止不掉点击事件,就会执行两次点击事件,bscroll 的点击事件有一个_constructed 属性,用来区分是原生的点击事件还是bscroll 注册的点击数事件
+        if (!event._constructed) {
           return
         }
-        console.log(food)
-        console.log(event)
         this.selectedFood = food
         this.$refs.food.showFoodDetail()
       }

@@ -85,13 +85,13 @@
       this.$root.eventHub.$on('ratingType.select', function (type) {
         _this.selectType = type
         _this.$nextTick(function () {
-          _this.foodDetailScroll.refresh()
+          _this.foodDetailScroll && _this.foodDetailScroll.refresh()
         })
       })
       this.$root.eventHub.$on('content.toggle', function (onlyContent) {
         _this.onlyContent = onlyContent
         _this.$nextTick(function () {
-          _this.foodDetailScroll.refresh()
+          _this.foodDetailScroll && _this.foodDetailScroll.refresh()
         })
       })
     },

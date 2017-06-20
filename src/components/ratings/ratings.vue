@@ -1,5 +1,6 @@
 <template>
-  <div class="ratings">
+  <div class="ratings" id="ratings-wrap">
+    <div>
       <div class="ranking">
         <div class="left">
           <p class="score">{{seller.score}}</p>
@@ -28,7 +29,7 @@
         </div>
         <div class="ratings-list-wrap">
           <ul class="ratings-list">
-            <li v-for="rating in ratings" class="rating-item border-line">
+            <li v-for="rating in ratings" v-show="needShow(rating.rateType,rating.text)" class="rating-item border-line">
               <div class="top">
                 <div class="avatar"><img :src="rating.avatar" alt=""></div>
                 <div class="info">
@@ -53,12 +54,17 @@
           </ul>
         </div>
       </div>
+    </div>
+    <shopcart ref="shopcart" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  const ALL = 2
   import star from '@/components/star/star'
+  import BScroll from 'better-scroll'
   import ratingselect from '@/components/ratingselect/ratingselect'
+  import shopcart from '@/components/shopcart/shopcart'
   import {formatData} from '@/common/js/date.js'
   const ERR_NO = 0
   export default{
@@ -76,22 +82,45 @@
       }
     },
     created: function () {
+      // 获取rating数据的接口
       this.$http.get('api/ratings').then(function (res) {
         if (res.body.code === ERR_NO) {
           this.ratings = res.body.data
+          // 调用方法创建scroll对象
+          this._initScroll()
         }
       })
       this.seller = this.$root.seller
 
       // 监听子组件的事件
       var _this = this
-      console.log(this.$root.eventHub)
       this.$root.eventHub.$on('ratingType.select', function (type) {
         _this.selectType = type
-        _this.$nextTick(function () {
-          _this.foodDetailScroll.refresh()
-        })
       })
+      // 监听子组件中的onlycontent被选中的事件
+      this.$root.eventHub.$on('content.toggle', function (onlyContent) {
+        _this.onlyContent = onlyContent
+      })
+    },
+    methods: {
+      _initScroll: function () {
+        this.ratingScroll = new BScroll(document.querySelector('#ratings-wrap'), {
+          click: true
+        })
+      },
+      needShow: function (type, text) {
+        console.log(text)
+        if (this.onlyContent && !text) {
+          return false
+        }
+        if (this.selectType === ALL) {
+          return true
+        } else if (this.selectType === type) {
+          return true
+        } else {
+          return false
+        }
+      }
     },
     filters: {
       formatData: function (time) {
@@ -101,7 +130,8 @@
     },
     components: {
       star,
-      ratingselect
+      ratingselect,
+      shopcart
     }
   }
 </script>
