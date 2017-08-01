@@ -81,7 +81,7 @@
     },
     created: function () {
       // 监听子组件的自定义事件
-      var _this = this
+      var _this = this;
       this.$root.eventHub.$on('ratingType.select', function (type) {
         _this.selectType = type
         _this.$nextTick(function () {
