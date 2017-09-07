@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8b949594-2963-4b01-841c-e96d6bebfd35" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/food/food.vue" afterPath="$PROJECT_DIR$/src/components/food/food.vue" />
-    </list>
+    <list default="true" id="8b949594-2963-4b01-841c-e96d6bebfd35" name="Default" comment="" />
     <ignored path="vue.eleme.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,7 +34,7 @@
       <file leaf-file-name="goods.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-43.615383">
+            <state vertical-scroll-proportion="0.0">
               <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
               <folding />
             </state>
@@ -47,8 +44,8 @@
       <file leaf-file-name="food.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/food/food.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.419643">
-              <caret line="165" column="10" selection-start-line="165" selection-start-column="6" selection-end-line="165" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.098712444">
+              <caret line="132" column="21" selection-start-line="132" selection-start-column="21" selection-end-line="132" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -57,7 +54,7 @@
       <file leaf-file-name="star.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/star/star.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="38.192307">
+            <state vertical-scroll-proportion="0.0">
               <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
               <folding />
             </state>
@@ -179,8 +176,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -389,6 +384,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -814,7 +811,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/star/star.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="38.192307">
+        <state vertical-scroll-proportion="0.0">
           <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
           <folding />
         </state>
@@ -822,7 +819,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-43.615383">
+        <state vertical-scroll-proportion="0.0">
           <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
           <folding />
         </state>
@@ -830,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/food/food.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.419643">
-          <caret line="165" column="10" selection-start-line="165" selection-start-column="6" selection-end-line="165" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.098712444">
+          <caret line="132" column="21" selection-start-line="132" selection-start-column="21" selection-end-line="132" selection-end-column="21" />
           <folding />
         </state>
       </provider>
